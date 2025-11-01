@@ -1,149 +1,76 @@
-.TH ENTERPRISE_SERVER 1 "January 2024" "v2.1" "Enterprise Data Server Manual"
+.TH ENTERPRISE_SERVER 1 "Enterprise Data Server"
 .SH NAME
-enterprise_server \- enterprise-grade data management server with persistent storage
+enterprise_server \- data management server
 .SH SYNOPSIS
 .B enterprise_server
-.SH DESCRIPTION
-.B enterprise_server
-is a high-performance C++ based data management system that provides persistent storage, advanced user management, and professional-grade features through a command-line interface. The server maintains user profiles with age, email, phone information and provides comprehensive CRUD operations with automatic data persistence.
 .SH COMMANDS
-.SS Data Management Commands
+.SS Data Commands
 .TP
 .B ADD
-Register a new user in the system. The command will prompt for user details including name, age, email, and phone number. Age validation ensures values between 1-120 years.
+Add new user. Asks for name, age, email, phone.
 .TP
 .B GET \fIname\fR
-Retrieve and display detailed information for the specified user. Shows all profile fields in a formatted display with creation timestamps.
+Show user details.
 .TP
 .B LIST
-Display all users in a professionally formatted table with columns for name, age, email, and phone. Handles empty database state gracefully.
+Show all users in table.
 .TP
 .B UPDATE \fIname\fR
-Modify an existing user's information. Prompts for new values while showing current ones. Updates last modified timestamp automatically.
+Change user information.
 .TP
 .B DELETE \fIname\fR
-Remove the specified user from the database. Operation is immediate and irreversible once confirmed.
-.SS Search & Analytics Commands
+Remove user.
+.SS Search Commands
 .TP
 .B SEARCH \fIterm\fR
-Search across all user fields (name, email, phone) for the specified term. Returns all matching records with partial matching support.
+Find users by name, email, or phone.
 .TP
 .B STATS
-Display server performance metrics including total users, operation count, server uptime, and storage file information.
-.SS System Operations Commands
+Show server information.
+.SS System Commands
 .TP
 .B BACKUP
-Create a manual backup of the current database. Backup files are stored in pipe-separated format for reliability.
+Make data backup.
 .TP
 .B GENERATE
-Create test data records for development and testing. Prompts for number of records to generate (1-1000 limit).
+Create test users.
 .TP
 .B CLEAR
-Wipe the entire database. Requires confirmation with the word "CONFIRM" for security purposes.
+Delete all users. Must type CONFIRM.
 .TP
 .B HELP
-Display the complete command reference with brief descriptions of all available commands.
+Show commands.
 .TP
 .B EXIT
-Perform graceful server shutdown with automatic data saving and final log entries.
+Stop server.
 .SH FILES
 .TP
 .B enterprise_database.dat
-Primary data storage file containing all user records with timestamps.
+User data file.
 .TP
 .B enterprise_backup.dat
-Backup data file created automatically before each save operation.
+Backup file.
 .TP
 .B system_log.txt
-Comprehensive activity log with timestamps for all server operations and system events.
-.SH DATA FORMAT
-The database file uses space-separated values with the following format:
-.RS
-\fIname age email phone created_timestamp modified_timestamp\fR
-.RE
-Backup files use pipe-separated values for improved reliability:
-.RS
-\fIname|age|email|phone|created_timestamp\fR
-.RE
-.SH FEATURES
-.IP \(bu 3
-Automatic data persistence with real-time saving
-.IP \(bu 3
-Professional table formatting with aligned columns
-.IP \(bu 3
-Comprehensive input validation and error handling
-.IP \(bu 3
-Multi-field search capability with partial matching
-.IP \(bu 3
-Activity logging with timestamped audit trail
-.IP \(bu 3
-Backup system with automatic and manual options
-.IP \(bu 3
-Test data generation for development purposes
-.SH EXAMPLES
+Activity log.
+.SH USAGE
 .TP
-.B Starting the server:
-$ ./enterprise_server
+.B Start server:
+./enterprise_server
 .TP
-.B Adding a new user:
+.B Add user:
 cmd> ADD
-.br
-Enter user details:
-.br
-  Name: John Smith
-.br
-  Age: 32
-.br
-  Email: john@company.com
-.br
-  Phone: 5550123456
 .TP
-.B Searching for users:
+.B Find user:
+cmd> GET john
+.TP
+.B Show all:
+cmd> LIST
+.TP
+.B Search:
 cmd> SEARCH company
 .TP
-.B Viewing server statistics:
-cmd> STATS
-.SH COMPILATION
-Compile the server using g++ with C++11 support:
-.RS
-.B g++ main.cpp -o enterprise_server -std=c++11 -O2
-.RE
-For debug builds, replace -O2 with -g. For maximum optimization, use -O3.
-.SH PERFORMANCE
-.IP \(bu 3
-User lookups: O(log n) using STL map
-.IP \(bu 3
-Data operations: Real-time with immediate persistence
-.IP \(bu 3
-Memory usage: Optimized container management
-.IP \(bu 3
-Search: Multi-field scanning with efficient algorithms
-.SH ERROR HANDLING
-The server provides clear error messages for common scenarios:
-.IP \(bu 3
-User not found during GET/DELETE/UPDATE operations
-.IP \(bu 3
-Invalid age input (outside 1-120 range)
-.IP \(bu 3
-File I/O errors during save/load operations
-.IP \(bu 3
-Invalid command syntax
-.SH SECURITY
-.IP \(bu 3
-Input validation prevents data corruption
-.IP \(bu 3
-Confirmation required for destructive operations
-.IP \(bu 3
-Audit logging tracks all system activities
-.IP \(bu 3
-Backup system provides data redundancy
-.SH EXIT STATUS
-The server returns 0 on normal shutdown and 1 on initialization errors.
-.SH SEE ALSO
-g++(1), make(1)
-.SH BUGS
-No known bugs. Report issues via the project's issue tracker.
-.SH AUTHOR
-Developed as a professional C++ data management solution.
-.SH COPYRIGHT
-Copyright (c) 2024. Free use permitted with attribution.
+.B Stop server:
+cmd> EXIT
+.SH COMPILE
+g++ main.cpp -o enterprise_server -std=c++11
